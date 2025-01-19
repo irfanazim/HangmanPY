@@ -25,9 +25,9 @@ def clear_screen():
     else:
         os.system("clear")
 
-# ASCII Art for the Hangman Stages with green color and border
+# List of hangman stages (from no body to a fully drawn hangman)
 hangman_stages = [
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║      |         ║
@@ -36,7 +36,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
@@ -45,7 +45,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
@@ -54,7 +54,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
@@ -63,7 +63,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
@@ -72,7 +72,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
@@ -81,7 +81,7 @@ hangman_stages = [
     ║     ===        ║
     ╚════════════════╝{RESET}
     """,
-    f"""{GREEN}
+    fr"""{GREEN}
     ╔════════════════╗
     ║  +---+         ║
     ║  O   |         ║
