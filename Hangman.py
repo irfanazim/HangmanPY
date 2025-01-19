@@ -106,3 +106,18 @@ main_menu_art = fr"""{GREEN}
 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
 {RESET}
 """
+
+# Class to handle the game state
+class GameState:
+    def __init__(self):
+        self.score = 0  # Starting score
+        self.leaderboard_file = "leaderboard.json"  # File to store the leaderboard
+        self.save_directory = "saved_games"  # Directory to store saved games
+        self.current_category = ""  # Current category of questions
+        self.question_index = 0  # Index to track the current question
+        self.username = ""  # Username of the player
+        self.lives = 6  # Number of lives the player has
+        
+        # Create the directory for saved games if it doesn't exist
+        if not os.path.exists(self.save_directory):
+            os.makedirs(self.save_directory)
