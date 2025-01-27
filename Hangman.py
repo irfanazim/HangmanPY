@@ -121,3 +121,11 @@ class GameState:
         # Create the directory for saved games if it doesn't exist
         if not os.path.exists(self.save_directory):
             os.makedirs(self.save_directory)
+    
+    def start_new_game(self):
+        #I nitializes the game state for a new game.
+        self.score = 0  # Set initial score
+        self.question_index = 0  # Set initial question index
+        self.lives = 6  # Set initial number of lives
+        self.choose_category()  # Prompt the user to choose a category
+        self.play_game()  # Start playing the game
