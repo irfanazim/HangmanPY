@@ -107,6 +107,25 @@ main_menu_art = fr"""{GREEN}
 {RESET}
 """
 
+# Dictionary holding the questions for different categories
+questions = {
+    "Science": [
+        ("What planet is known as the Red Planet?", "Mars"),
+        ("What gas do plants breathe in that humans and animals breathe out?", "CarbonDioxide"),
+        ("What is the chemical symbol for water?", "H2O")
+    ],
+    "History": [
+        ("Who was the first President of the United States?", "George Washington"),
+        ("In what year did World War II end?", "1945"),
+        ("The Great Fire of London occurred in which year?", "1666")
+    ],
+    "Geography": [
+        ("What is the capital of France?", "Paris"),
+        ("Which continent is the Sahara Desert located on?", "Africa"),
+        ("Mount Everest is part of which mountain range?", "Himalayas")
+    ]
+}
+
 # Class to handle the game state
 class GameState:
     def __init__(self):
