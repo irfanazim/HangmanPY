@@ -12,6 +12,7 @@ import json
 import random
 import os
 import platform
+import time
 
 # ANSI color codes
 GREEN = "\033[32m"
