@@ -148,3 +148,43 @@ class GameState:
         self.lives = 6  # Set initial number of lives
         self.choose_category()  # Prompt the user to choose a category
         self.play_game()  # Start playing the game
+
+    def choose_category(self):
+        # Displays available categories for the user to choose from.
+        while True:  # Loop until a valid choice is made
+            print("\nChoose a category:")
+            categories = list(questions.keys())  # Retrieve the available categories
+            for i, category in enumerate(categories):
+                print(f"{i + 1}. {category}")  # Display category choices
+
+            try:
+                choice = int(input("Enter the number of your chosen category: ")) - 1  # User selects a category
+                if 0 <= choice < len(categories):  # Check for valid input
+                    self.current_category = categories[choice]  # Set the chosen category
+                    print(f"You chose {self.current_category}. Let's start!")  # Confirm category selection
+                    break  # Exit the loop if a valid choice is made
+                else:
+                    print("Invalid choice. Please enter a valid number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")  # If input is not a valid number
+    
+    def switch_category(self):
+        # Allows the player to switch to a different category during the game.
+        while True:  # Loop until a valid choice is made
+            print("\nAvailable categories:")
+            categories = list(questions.keys())  # Retrieve the available categories
+            for i, category in enumerate(categories):
+                print(f"{i + 1}. {category}")  # Display category choices
+
+            try:
+                choice = int(input("Enter the number of your chosen category: ")) - 1  # User selects a category
+                if 0 <= choice < len(categories):  # Check for valid input
+                    self.current_category = categories[choice]  # Set the chosen category
+                    self.question_index = 0  # Reset the question index
+                    print(f"You chose {self.current_category}. Let's start!")  # Confirm category selection
+                    self.play_game()  # Start the game with the new category
+                    break  # Exit the loop if a valid choice is made
+                else:
+                    print("Invalid choice. Please enter a valid number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")  # If input is not a valid number
