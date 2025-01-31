@@ -189,3 +189,18 @@ class GameState:
                     print("Invalid choice. Please enter a valid number.")
             except ValueError:
                 print("Invalid input. Please enter a number.")  # If input is not a valid number
+
+
+
+    # Function to save the current game state into a file 
+    def save_game_state(self):
+        save_path = os.path.join(self.save_directory, f"{self.username}.json") # Ensures that the folder and filename are combined correctly
+        with open(save_path, 'w') as f: 
+            json.dump({
+                "username": self.username, 
+                "score": self.score, 
+                "current_category": self.current_category,
+                "question_index": self.question_index, 
+                "lives": self.lives
+            }, f)
+    print("Game saved successfully!")
