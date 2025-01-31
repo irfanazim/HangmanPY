@@ -215,3 +215,32 @@ class GameState:
             print(f"{GREEN}No saved games found.{RESET}")
             input("\nPress Enter to return to main menu.")
             return []
+        
+
+    def main_menu(self):
+        # Displays the main menu and handles user input to start a game, load a game, view the leaderboard, or quit.
+        while True:
+            clear_screen()  # Clears the screen for a clean view
+            print(main_menu_art)  
+            print("1. Start New Game")
+            print("2. Load Game")
+            print("3. Show Leaderboard")
+            print("4. Quit")
+
+            choice = input("Select an option: ")
+
+            # Handle each menu option
+            if choice == "1":
+                self.username = input("Enter your username: ")  # Prompt for the user's username
+                self.start_new_game()  # Start a new game
+            elif choice == "2":
+                if self.load_game_state():  # Attempt to load saved game state
+                    self.play_game()  # If successful, start playing the game
+            elif choice == "3":
+                self.display_leaderboard()  # Show the leaderboard
+                input("Press Enter to return to the main menu.")  # Wait for the user to press Enter
+            elif choice == "4":
+                print("Goodbye!")  # Display a farewell message
+                break  # Exit the loop, effectively quitting the game
+            else:
+                print("Invalid choice. Please try again.")  # If the input is invalid, prompt again
