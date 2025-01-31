@@ -204,3 +204,14 @@ class GameState:
                 "lives": self.lives
             }, f)
     print("Game saved successfully!")
+
+    # Function to display all saved games to the player
+    def display_saved_games(self):
+        clear_screen()  # Clears the screen for a clean view
+        # Get a list of files in the save directory that end with '_save.json'
+        save_files = [f for f in os.listdir(self.save_directory) if f.endswith('_save.json')]
+        
+        if not save_files:
+            print(f"{GREEN}No saved games found.{RESET}")
+            input("\nPress Enter to return to main menu.")
+            return []
