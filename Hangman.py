@@ -244,3 +244,54 @@ class GameState:
                 break  # Exit the loop, effectively quitting the game
             else:
                 print("Invalid choice. Please try again.")  # If the input is invalid, prompt again
+
+    # Function to display the leaderboard with the highest scores
+    def display_leaderboard(self):
+        clear_screen()
+        if not os.path.exists(self.leaderboard_file):
+            print("No leaderboard data available.")
+            return
+        # Open and read the leaderboard data from the file
+        with open(self.leaderboard_file, 'r') as f:
+            leaderboard = json.load(f)
+
+        if not leaderboard:
+            print("Leaderboard is empty.")
+            return
+        # Calculate total width of the table
+        max_name_length = max(len(entry["username"]) for entry in leaderboard)
+        max_name_length = max(max_name_length, 8) # minimum 8 characters for "USERNAME"
+
+        # Columns for the leaderboard
+        name_column_width = max_name_length + 2  # +2 for padding
+        score_column_width = 10  # Score column width
+        total_width = name_column_width + score_column_width + 3  # +3 for borders
+
+        # Table formatting characters for box-drawing
+        TOP_LEFT = '╔'
+        TOP_RIGHT = '╗'
+        BOTTOM_LEFT = '╚'
+        BOTTOM_RIGHT = '╝'
+        HORIZONTAL = '═'
+        VERTICAL = '║'
+        T_DOWN = '╦'
+        T_UP = '╩'
+        T_RIGHT = '╠'
+        T_LEFT = '╣'
+        CROSS = '╬'
+
+        # Print table header
+        print(f"{GREEN}")  # Start green color
+        print(f"{TOP_LEFT}{HORIZONTAL * name_column_width}{T_DOWN}{HORIZONTAL * score_column_width}{TOP_RIGHT}")
+        print(f"{VERTICAL} {'USERNAME'.ljust(max_name_length)} {VERTICAL} {'SCORE'.center(8)} {VERTICAL}")
+        print(f"{T_RIGHT}{HORIZONTAL * name_column_width}{CROSS}{HORIZONTAL * score_column_width}{T_LEFT}")
+
+        # Print each entry
+        for i, entry in enumerate(leaderboard):
+            username = entry["username"]
+            score = str(entry["score"])
+            print(f"{VERTICAL} {username.ljust(max_name_length)} {VERTICAL} {score.center(8)} {VERTICAL}")
+
+        # Print bottom border
+        print(f"{BOTTOM_LEFT}{HORIZONTAL * name_column_width}{T_UP}{HORIZONTAL * score_column_width}{BOTTOM_RIGHT}")
+        print(f"{RESET}")  # Reset color back to default
