@@ -295,3 +295,37 @@ class GameState:
         # Print bottom border
         print(f"{BOTTOM_LEFT}{HORIZONTAL * name_column_width}{T_UP}{HORIZONTAL * score_column_width}{BOTTOM_RIGHT}")
         print(f"{RESET}")  # Reset color back to default
+
+        # Function to update the leaderboard with the player's score
+    def update_leaderboard(self):
+         # Check if the leaderboard file exists
+        if os.path.exists(self.leaderboard_file):
+            # Open and read the existing leaderboard data from the file
+            with open(self.leaderboard_file, 'r') as f:
+                leaderboard = json.load(f)
+        else:
+            # If the file doesn't exist, initialize an empty leaderboard
+            leaderboard = []
+
+        user_found = False
+        # Loop through each entry in the leaderboard to find the current user
+        for entry in leaderboard:
+            # If the username matches, update the score with the higher of the two scores
+            if entry["username"] == self.username:
+                entry["score"] = max(entry["score"], self.score)
+                user_found = True
+                break
+
+        # If the user is not found, add a new entry for the user with their score
+        if not user_found:
+            leaderboard.append({"username": self.username, "score": self.score})
+        # Sort the leaderboard in descending order based on the score
+        leaderboard = sorted(leaderboard, key=lambda x: x["score"], reverse=True)
+         # Write the updated leaderboard back to the file
+        with open(self.leaderboard_file, 'w') as f:
+            json.dump(leaderboard, f)
+        print("Leaderboard updated successfully!")
+
+if __name__ == "__main__":
+    game = GameState()  # Create an instance of GameState
+    game.main_menu()  # Call the main menu to start the game
