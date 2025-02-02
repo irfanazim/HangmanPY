@@ -379,43 +379,20 @@ class GameState:
         if not leaderboard:
             print("Leaderboard is empty.")
             return
-        # Calculate total width of the table
-        max_name_length = max(len(entry["username"]) for entry in leaderboard)
-        max_name_length = max(max_name_length, 8) # minimum 8 characters for "USERNAME"
+        # Initialize table data and headers
+        headers = ["#", "USERNAME", "SCORE"]
+        table_data = []
 
-        # Columns for the leaderboard
-        name_column_width = max_name_length + 2  # +2 for padding
-        score_column_width = 10  # Score column width
-        total_width = name_column_width + score_column_width + 3  # +3 for borders
+        # Populate the table data
+        for i, entry in enumerate(leaderboard, start=1):
+            username = entry.get("username", "Unknown")
+            score = entry.get("score", "None")
+            table_data.append([i, username, score])
 
-        # Table formatting characters for box-drawing
-        TOP_LEFT = '╔'
-        TOP_RIGHT = '╗'
-        BOTTOM_LEFT = '╚'
-        BOTTOM_RIGHT = '╝'
-        HORIZONTAL = '═'
-        VERTICAL = '║'
-        T_DOWN = '╦'
-        T_UP = '╩'
-        T_RIGHT = '╠'
-        T_LEFT = '╣'
-        CROSS = '╬'
-
-        # Print table header
-        print(f"{GREEN}")  # Start green color
-        print(f"{TOP_LEFT}{HORIZONTAL * name_column_width}{T_DOWN}{HORIZONTAL * score_column_width}{TOP_RIGHT}")
-        print(f"{VERTICAL} {'USERNAME'.ljust(max_name_length)} {VERTICAL} {'SCORE'.center(8)} {VERTICAL}")
-        print(f"{T_RIGHT}{HORIZONTAL * name_column_width}{CROSS}{HORIZONTAL * score_column_width}{T_LEFT}")
-
-        # Print each entry
-        for i, entry in enumerate(leaderboard):
-            username = entry["username"]
-            score = str(entry["score"])
-            print(f"{VERTICAL} {username.ljust(max_name_length)} {VERTICAL} {score.center(8)} {VERTICAL}")
-
-        # Print bottom border
-        print(f"{BOTTOM_LEFT}{HORIZONTAL * name_column_width}{T_UP}{HORIZONTAL * score_column_width}{BOTTOM_RIGHT}")
-        print(f"{RESET}")  # Reset color back to default
+        # Print the table using tabulate
+        print(f"{GREEN}")
+        print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
+        print(f"{RESET}")
 
         # Function to update the leaderboard with the player's score
     def update_leaderboard(self):
