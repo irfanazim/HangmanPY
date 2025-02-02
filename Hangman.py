@@ -325,7 +325,7 @@ class GameState:
         # Inserting data (_save.json files) into the table
         i = 1  # To keep track of the row number (starting from 1)
         for file in save_files:
-            with open(os.path.join(self.save_directory, file), 'r') as f:
+            with open(os.path.join(self.save_directory, file), 'r') as f: # Open the save file in read mode
                 data = json.load(f)
                 username = data.get("username", "Unknown")
                 category = data.get("current_category", "None")
@@ -336,7 +336,47 @@ class GameState:
         print(f"{GREEN}")
         print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
         print(f"{RESET}")
+    
+        # Get the user's choice for which save file to load
+        while True:
+            try:
+                choice = input("\nEnter save number to load (or press enter to return to main menu): ")
+                if choice == "":
+                    return None
+                # If the user enters 1, it becomes 0 (the first file in the list: index[0]).
+                choice = int(choice) - 1
+                 # Check if the choice is within the valid range of save files 
+                if 0 <= choice < len(save_files):
+                    return save_files[choice]
+                else:
+                    print("Invalid save number. Please try again.")
+            except ValueError: # To prevent program from crashing if input is not a valid integer 
+                print("Please enter a valid number.")
+        
+    # Function to load the game state from a saved file
+    def load_game_state(self):
+        save_file = self.display_saved_games()
+        if not save_file:
+            return False
+        
+        save_path = os.path.join(self.save_directory, save_file)
+        with open(save_path, 'r') as f:  # Open the save file in read mode
+            data = json.load(f) 
+            # Retrieve the saved game data 
+            self.username = data.get("username", "Player")
+            self.score = data.get("score", 0) #  If it doesn't exist, self.score is set to 6.
+            self.current_category = data.get("current_category", "") # If it doesn't exist, self.score is set to empty string
+            self.question_index = data.get("question_index", 0)  # If it doesn't exist, self.score is set to 0.
+            self.lives = data.get("lives", 6) # If it doesn't exist, self.lives is set to 6.
 
+            print(f"\n Loading game for {self.username}...")
+            print(f"Category: {self.current_category}")
+            print(f"Score: {self.score}")
+            print(f"Lives: {self.lives}")
+            input("\nPress Enter to continue...")
+            return True
+            
+    # Function of main menu        
     def main_menu(self):
         # Displays the main menu and handles user input to start a game, load a game, view the leaderboard, or quit.
         while True:
@@ -358,7 +398,7 @@ class GameState:
                     self.play_game()  # If successful, start playing the game
             elif choice == "3":
                 self.display_leaderboard()  # Show the leaderboard
-                input("Press Enter to return to the main menu.")  # Wait for the user to press Enter
+                input("\nPress Enter to return to the main menu.")  # Wait for the user to press Enter
             elif choice == "4":
                 print("Goodbye!")  # Display a farewell message
                 break  # Exit the loop, effectively quitting the game
@@ -370,7 +410,7 @@ class GameState:
     def display_leaderboard(self):
         clear_screen()
         if not os.path.exists(self.leaderboard_file):
-            print("No leaderboard data available.")
+            print(f"{GREEN}No leaderboard data available.{RESET}")
             return
         # Open and read the leaderboard data from the file
         with open(self.leaderboard_file, 'r') as f:
