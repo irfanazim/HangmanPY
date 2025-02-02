@@ -305,7 +305,13 @@ class GameState:
                 "question_index": self.question_index, 
                 "lives": self.lives
             }, f)
-    print("Game saved successfully!")
+        print("Game saved successfully!")
+
+        self.update_leaderboard()
+        time.sleep(2)
+
+    
+
 
     # Function to display all saved games to the player
     def display_saved_games(self):
@@ -436,6 +442,10 @@ class GameState:
 
         # Function to update the leaderboard with the player's score
     def update_leaderboard(self):
+          
+        if not self.username:
+            print("Username not set. Cannot update leaderboard.")
+            return
          # Check if the leaderboard file exists
         if os.path.exists(self.leaderboard_file):
             # Open and read the existing leaderboard data from the file
@@ -446,20 +456,18 @@ class GameState:
             leaderboard = []
 
         user_found = False
-        # Loop through each entry in the leaderboard to find the current user
         for entry in leaderboard:
-            # If the username matches, update the score with the higher of the two scores
+             # If the username matches, update the score with the higher of the two scores
             if entry["username"] == self.username:
                 entry["score"] = max(entry["score"], self.score)
                 user_found = True
                 break
-
         # If the user is not found, add a new entry for the user with their score
         if not user_found:
             leaderboard.append({"username": self.username, "score": self.score})
         # Sort the leaderboard in descending order based on the score
         leaderboard = sorted(leaderboard, key=lambda x: x["score"], reverse=True)
-         # Write the updated leaderboard back to the file
+        # Write the updated leaderboard back to the file
         with open(self.leaderboard_file, 'w') as f:
             json.dump(leaderboard, f)
         print("Leaderboard updated successfully!")
