@@ -13,6 +13,16 @@ import random
 import os
 import platform
 import time
+# To import 'tabulate', it has to be install first (Auto-install code for tabulate)
+try:
+    from tabulate import tabulate # If 'tabulate' is installed, this will succeed, and the script will use it.
+except ImportError: # If 'tabulate' is missing, install it
+    print("Installing 'tabulate' library...") # Notify the user that the 'tabulate' library is being installed.
+    import subprocess
+    import sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tabulate"]) 
+    from tabulate import tabulate 
+
 
 # ANSI color codes
 GREEN = "\033[32m"
@@ -286,7 +296,7 @@ class GameState:
 
     # Function to save the current game state into a file 
     def save_game_state(self):
-        save_path = os.path.join(self.save_directory, f"{self.username}.json") # Ensures that the folder and filename are combined correctly
+        save_path = os.path.join(self.save_directory, f"{self.username}_save.json") # Ensures that the folder and filename are combined correctly
         with open(save_path, 'w') as f: 
             json.dump({
                 "username": self.username, 
@@ -308,6 +318,24 @@ class GameState:
             input("\nPress Enter to return to main menu.")
             return []
         
+        # Initialize table data and headers
+        headers = ["#", "USERNAME", "CATEGORY"]
+        table_data = []
+
+        # Inserting data (_save.json files) into the table
+        i = 1  # To keep track of the row number (starting from 1)
+        for file in save_files:
+            with open(os.path.join(self.save_directory, file), 'r') as f:
+                data = json.load(f)
+                username = data.get("username", "Unknown")
+                category = data.get("current_category", "None")
+                table_data.append([i, username, category])
+                i += 1  # Increasing the row number by 1 
+
+        # Print the table using tabulate
+        print(f"{GREEN}")
+        print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
+        print(f"{RESET}")
 
     def main_menu(self):
         # Displays the main menu and handles user input to start a game, load a game, view the leaderboard, or quit.
@@ -336,6 +364,7 @@ class GameState:
                 break  # Exit the loop, effectively quitting the game
             else:
                 print("Invalid choice. Please try again.")  # If the input is invalid, prompt again
+
 
     # Function to display the leaderboard with the highest scores
     def display_leaderboard(self):
@@ -420,4 +449,4 @@ class GameState:
 
 if __name__ == "__main__":
     game = GameState()  # Create an instance of GameState
-    game.main_menu()  # Call the main menu to start the game
+    game.main_menu()  # Call the main menu to start the game 
