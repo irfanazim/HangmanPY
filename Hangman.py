@@ -190,7 +190,99 @@ class GameState:
             except ValueError:
                 print("Invalid input. Please enter a number.")  # If input is not a valid number
 
+    def play_game(self):
+        # Handles the core game loop, including asking questions, taking guesses, and handling game over conditions.
+        while True: 
+            category_questions = questions[self.current_category]  # Get the questions for the selected category
+            random.shuffle(category_questions)  # Shuffle questions for randomness
+            game_over = False  # Flag to check if the game is over
 
+            # Loop through questions until the user runs out of questions or lives
+            while self.question_index < len(category_questions):
+                question, answer = category_questions[self.question_index]  # Get the current question and answer
+                masked_answer = ['_' for _ in answer]  # Mask the answer for the user to guess
+                guessed_letters = set()  # Set to track guessed letters
+
+                # While the user still has lives and the answer is incomplete, keep guessing
+                while self.lives > 0 and '_' in masked_answer:
+                    print("\nQuestion:", question)  # Display the current question
+                    print("Answer:", ' '.join(masked_answer))  # Display the partially guessed answer
+                    print(f"Lives remaining: {self.lives}")  # Show the number of lives left
+                    print(hangman_stages[6 - self.lives])  # Display the hangman stage based on remaining lives
+
+                    # Prompt for a guess
+                    guess = input("Guess a letter, the full answer, type 'save' to save and exit, or 'switch' to change category: ").strip()
+
+                    # Handle special inputs: save, switch category
+                    if guess.lower() == "save":
+                        self.save_game_state()  # Save the current game state
+                        return  # Exit to the main menu
+                    if guess.lower() == "switch":
+                        self.switch_category()  # Switch to a different category
+                        return  # Exit to the category selection
+
+                    # Handle guesses for a single letter
+                    if len(guess) == 1:
+                        if guess in guessed_letters:  # Check if the letter has already been guessed
+                            print("You already guessed that letter.")
+                            continue  # Skip the rest of the loop if the letter was already guessed
+                        guessed_letters.add(guess)  # Add the letter to guessed letters
+                        if guess.lower() in answer.lower():  # Check if the letter is in the answer
+                            # Update masked_answer with the correct letter(s)
+                            for i, letter in enumerate(answer):
+                                if letter.lower() == guess.lower():
+                                    masked_answer[i] = letter
+                            print("Good guess!")
+                        else:
+                            self.lives -= 1  # Deduct a life for an incorrect guess
+                            print("Wrong guess!")
+                            
+                    # Handle the case where the player guesses the full answer
+                    elif guess.lower() == answer.lower():
+                        masked_answer = list(answer)  # Reveal the full answer
+                        print("Correct!")
+                        break  # End the question
+                    else:
+                        self.lives -= 1  # Deduct a life for an incorrect answer
+                        print("Wrong answer!")
+
+                # Check if the player successfully guessed the answer
+                if '_' not in masked_answer:
+                    self.score += 10  # Award points for the correct answer
+                    self.question_index += 1  # Move to the next question
+                else:
+                    print(f"Out of lives! The answer was '{answer}'.")  # Show the correct answer if out of lives
+                    game_over = True  # Set the game over flag
+                    break  # End the game loop
+
+            if game_over:
+                print("\nGame over! You ran out of lives.")
+                break  # Exit the loop if game over
+
+            # Display a message if the player completes the category
+            print(f"\nCongratulations! You've completed the {self.current_category} category!")
+            print(f"Your current score is {self.score}")
+            
+            # Offer options to continue or end the game
+            while True:
+                choice = input("\n1. Continue with new category\n2. End game\nChoice (1 or 2): ").strip()
+                if choice == "1":
+                    self.choose_category()  # Choose a new category to continue playing
+                    self.question_index = 0  # Reset question index
+                    break  # Continue to the next category
+                elif choice == "2":
+                    game_over = True  # Set game over flag
+                    break  # Exit the game loop
+                else:
+                    print("Invalid choice. Enter 1 or 2.")  # If invalid input, prompt again
+            
+            if game_over:
+                break  # Exit the game loop if game over
+
+        print(f"\nGame over! Final score: {self.score}")  # Display final score
+        self.save_game_state()  # Save the final game state
+        self.update_leaderboard()  # Update the leaderboard
+        input("Press Enter to return to main menu.")  # Wait for the user to return to the main menu
 
     # Function to save the current game state into a file 
     def save_game_state(self):
