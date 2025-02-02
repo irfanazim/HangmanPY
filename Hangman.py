@@ -310,9 +310,6 @@ class GameState:
         self.update_leaderboard()
         time.sleep(2)
 
-    
-
-
     # Function to display all saved games to the player
     def display_saved_games(self):
         clear_screen()  # Clears the screen for a clean view
