@@ -126,9 +126,9 @@ questions = {
         ("What is the chemical symbol for water?", "H2O")
     ],
     "History": [
-        ("Who was the first President of the United States?", "George Washington"),
+        ("Who was the first President of the United States?", "GeorgeWashington"),
         ("In what year did World War II end?", "1945"),
-        ("The Great Fire of London occurred in which year?", "1666")
+        ("In what year did Malaysia achieved independence?", "1957")
     ],
     "Geography": [
         ("What is the capital of France?", "Paris"),
