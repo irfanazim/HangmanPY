@@ -407,7 +407,7 @@ class GameState:
                 break  # Exit the loop, effectively quitting the game
             else:
                 print("Invalid choice. Please try again.")  # If the input is invalid, prompt again
-
+                time.sleep(2)
 
     # Function to display the leaderboard with the highest scores
     def display_leaderboard(self):
