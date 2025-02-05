@@ -1,4 +1,4 @@
-# Hangman Game
+# Answer or Hang
 
 ## Table of Contents
 - [Introduction](#introduction)
