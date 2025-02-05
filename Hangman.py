@@ -145,16 +145,31 @@ questions = {
 class GameState:
     def __init__(self):
         self.score = 0  # Starting score
-        self.leaderboard_file = "leaderboard.json"  # File to store the leaderboard
-        self.save_directory = "saved_games"  # Directory to store saved games
+        # Get the directory where Hangman.py is located
+        self.game_data_dir = os.path.dirname(os.path.abspath(__file__))
+        self.leaderboard_file = os.path.join(self.game_data_dir, "leaderboard.json")  # File to store the leaderboard
+        self.save_directory = os.path.join(self.game_data_dir, "saved_games")  # Directory to store saved games
         self.current_category = ""  # Current category of questions
         self.question_index = 0  # Index to track the current question
         self.username = ""  # Username of the player
         self.lives = 6  # Number of lives the player has
         
-        # Create the directory for saved games if it doesn't exist
-        if not os.path.exists(self.save_directory):
-            os.makedirs(self.save_directory)
+        # Create the necessary directories and files if they don't exist
+        try:
+            # Create saved_games directory if it doesn't exist
+            if not os.path.exists(self.save_directory):
+                os.makedirs(self.save_directory)
+            
+            # Create leaderboard.json with empty list if it doesn't exist
+            if not os.path.exists(self.leaderboard_file):
+                with open(self.leaderboard_file, 'w') as f:
+                    json.dump([], f)
+                    
+        except Exception as e:
+            print(f"Warning: Could not create save directory or leaderboard file. Please run this program with appropriate permissions.")
+            print(f"Error details: {e}")
+            print("You can try running the program as administrator or changing the save location.")
+            input("Press Enter to continue anyway (saving features won't work)...")
     
     def start_new_game(self):
         #I nitializes the game state for a new game.
