@@ -123,12 +123,16 @@ questions = {
     "Science": [
         ("What planet is known as the Red Planet?", "Mars"),
         ("What gas do plants breathe in that humans and animals breathe out?", "CarbonDioxide"),
-        ("What is the chemical symbol for water?", "H2O")
+        ("What is the chemical symbol for water?", "H2O"),
+        ("What is the largest planet in our solar system?", "Jupiter"),
+        ("What is the process by which plants make their own food called?", "Photosynthesis"),
+        ("What is the chemical symbol for gold?", "Au")
     ],
     "History": [
-        ("Who was the first President of the United States?", "GeorgeWashington"),
         ("In what year did World War II end?", "1945"),
-        ("In what year did Malaysia achieved independence?", "1957")
+        ("In what year did Malaysia achieved independence?", "1957"),
+        ("Which country occupied Malaysia during World War II?", "Japan"),
+
     ],
     "Geography": [
         ("What is the capital of France?", "Paris"),
@@ -472,3 +476,4 @@ class GameState:
 if __name__ == "__main__":
     game = GameState()  # Create an instance of GameState
     game.main_menu()  # Call the main menu to start the game 
+    os.system(f'start cmd /k python "{__file__}"') # Runs the file through cmd when opened.
