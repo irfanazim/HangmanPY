@@ -476,4 +476,3 @@ class GameState:
 if __name__ == "__main__":
     game = GameState()  # Create an instance of GameState
     game.main_menu()  # Call the main menu to start the game 
-    os.system(f'start cmd /k python "{__file__}"') # Runs the file through cmd when opened.
