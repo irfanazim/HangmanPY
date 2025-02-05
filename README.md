@@ -53,7 +53,6 @@ Upon running the game, you will be presented with the main menu. Here are the av
 2. **Guess Letters or Words:** You will be presented with a question and a masked answer. Guess letters or the full answer.
 3. **Lives:** You have 6 lives. Each incorrect guess reduces your lives.
 4. **Winning:** Correctly guess the answer to earn points and move to the next question.
-5. **End of Category:** Completing all questions in a category awards you additional points.
 
 ## Leaderboard
 The leaderboard tracks the highest scores of all players. You can view it from the main menu. Scores are saved in a JSON file (`leaderboard.json`).
