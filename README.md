@@ -1,4 +1,4 @@
-# Answer or Hang
+# Hangman
 
 ## Table of Contents
 - [Introduction](#introduction)
