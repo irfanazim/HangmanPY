@@ -12,7 +12,7 @@
 - [License](#license)
 
 ## Introduction
-Welcome to **Hangman.py**, a text-based Hangman game designed for the course **CSP1114: Problem Solving and Program Design**. This game allows players to guess words or phrases from a variety of categories, with each incorrect guess bringing them closer to a "hanged" stick figure.
+A text-based Hangman game designed for the course **CSP1114: Problem Solving and Program Design**. This game allows players to guess words or phrases from a variety of categories, with each incorrect guess bringing them closer to a "hanged" stick figure.
 
 ## Features
 - **Multiple Categories:** Choose from Science, History, and Geography questions.
