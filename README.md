@@ -9,7 +9,6 @@
 - [Leaderboard](#leaderboard)
 - [Saving and Loading](#saving-and-loading)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 A text-based Hangman game designed for the course **CSP1114: Problem Solving and Program Design**. This game allows players to guess words or phrases from a variety of categories, with each incorrect guess bringing them closer to a "hanged" stick figure.
@@ -67,8 +66,3 @@ Contributions are welcome. Feel free to open issues or submit pull requests. Her
 - Add more categories and questions.
 - Improve the user interface.
 - Optimize the code for better performance.
-
-## License
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
-
-
