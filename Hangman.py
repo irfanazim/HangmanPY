@@ -3,7 +3,7 @@
 # Course: CSP1114 PROBLEM SOLVING AND PROGRAM DESIGN
 # Lecture / Lab Section: TC2L / TL6L
 # Trimester: 2430
-# Names: MEMBER_NAME_1 | MEMBER_NAME_2 | MEMBER_NAME_3 | MEMBER_NAME_4
+# Names: MEMBER_NAME_1 | MEMBER_NAME_2 | MEMBER_NAME_3 | 
 # IDs: MEMBER_ID_1 | MEMBER_ID_2 | MEMBER_ID_3 | MEMBER_ID_3
 # Emails: MEMBER_EMAIL_1 | MEMBER_EMAIL_2 | MEMBER_EMAIL_3 | MEMBER_EMAIL_3
 # *************************************************************************
@@ -132,12 +132,18 @@ questions = {
         ("In what year did World War II end?", "1945"),
         ("In what year did Malaysia achieved independence?", "1957"),
         ("Which country occupied Malaysia during World War II?", "Japan"),
+        ("Which ancient civilization built the pyramids in Egypt?", "Egyptians"),
+        ("How many prime ministers does malaysia have?", "8"),
+        ("Which city did Parameswara found in the early 15th century?", "Malacca")
 
     ],
     "Geography": [
         ("What is the capital of France?", "Paris"),
         ("Which continent is the Sahara Desert located on?", "Africa"),
-        ("Mount Everest is part of which mountain range?", "Himalayas")
+        ("Mount Everest is part of which mountain range?", "Himalayas"),
+        ("What is the largest ocean on Earth?", "Pacific Ocean"),
+        ("Which country is home to the Amazon Rainforest?", "Brazil"),
+        ("Which country is known as the 'Land of the Rising Sun'?", "Japan")
     ]
 }
 
