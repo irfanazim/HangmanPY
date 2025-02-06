@@ -133,7 +133,7 @@ questions = {
         ("In what year did Malaysia achieved independence?", "1957"),
         ("Which country occupied Malaysia during World War II?", "Japan"),
         ("Which ancient civilization built the pyramids in Egypt?", "Egyptians"),
-        ("How many prime ministers does malaysia have?", "8"),
+        ("How many prime ministers does malaysia have?", "10"),
         ("Which city did Parameswara found in the early 15th century?", "Malacca")
 
     ],
