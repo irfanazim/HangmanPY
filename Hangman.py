@@ -316,7 +316,6 @@ class GameState:
 
         print(f"\nGame over! Final score: {self.score}")  # Display final score
         self.save_game_state()  # Save the final game state
-        self.update_leaderboard()  # Update the leaderboard
         input("Press Enter to return to main menu.")  # Wait for the user to return to the main menu
 
     # Function to save the current game state into a file 
