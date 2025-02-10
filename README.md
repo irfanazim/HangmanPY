@@ -21,24 +21,6 @@ A text-based Hangman game designed for the course **CSP1114: Problem Solving and
 - **User-Friendly Interface:** Easy navigation with clear instructions.
 - **Platform Compatibility:** Works on Windows, macOS, and Linux.
 
-## Installation
-To play **Hangman.py**, you need Python installed on your system. Follow these steps to set up the game:
-
-1. **Install Python:** Ensure you have Python 3.x installed. You can download it from [python.org](https://www.python.org/).
-2. **Clone the Repository:** Clone this repository to your local machine.
-   ```bash
-   git clone https://github.com/your-repo/hangman.git
-   cd hangman
-   ```
-3. **Install Dependencies:** The game requires the `tabulate` library for displaying tables. You can install it using pip:
-   ```bash
-   pip install tabulate
-   ```
-4. **Run the Game:** Execute the game script.
-   ```bash
-   python Hangman.py
-   ```
-
 ## Usage
 Upon running the game, you will be presented with the main menu. Here are the available options:
 
